@@ -31,3 +31,34 @@ class JASample():
         last_name = row[1]
         age = row[2]
         print "This user's name is "+first_name+" "+last_name+" and they are "+age+" old." 
+
+    '''In the first 2 examples you wanted only to get one row from a table. What if you wanted to get a count of all rows or see if there is
+    a dup of your username which should be unique but some how there is more than one in the db?'''
+    def get_row_count(self,user):
+        cursor = self.database.connect_to_db()
+        cursor.execute("select count(*) from accounts where username =%s;" % user)
+        print cursor.rowcount
+    
+    '''now what if you want to get all the rows from a query hand have them available orginized for use?'''
+    
+    def print_all_rows(self, name):
+        '''In this example lets say there are only 3 columns (first_name, last_name, age) and you want everyones name that starts with Joseph'''
+        data={}
+        count = 1
+        cursor = self.database.connect_to_db()
+        cursor.execute("select first_name, last_name, age from accounts where username =%s;" % name)
+        
+        '''lets put the results in a dictionary'''
+        row = cursor.fetchone()
+        while row is not None:
+            data['row_'+str(count)]={'first':row[0], 'last':row[1], 'age':row[2]}
+            row = cursor.fetchone()
+            count = (count+1)
+            
+        '''once loop is done lets print them'''
+        for key,value in data.iteritems():
+            print key+" = "+value['first']+" "+value['last']+" is "+value['age']+" old."
+        
+        
+        
+        

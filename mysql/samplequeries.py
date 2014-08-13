@@ -44,7 +44,7 @@ class JASample():
         data={}
         count = 1
         cursor = self.database.connect_to_db()
-        cursor.execute("select first_name, last_name, age from accounts where username =%s;" % name)
+        cursor.execute("select first_name, last_name, age from accounts where first_name =%s;" % name)
         
         #lets put the results in a dictionary
         row = cursor.fetchone()

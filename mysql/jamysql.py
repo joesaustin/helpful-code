@@ -18,10 +18,10 @@ class JAMysql():
         return cursor
 
     def db_config(self):
-        parameters = {"host":"",
-                      "user":"username",
-                      "passwd":"password",
-                      "db":"sp"}
+        parameters = {"host":"localhost",
+                      "user":"",
+                      "passwd":"",
+                      "db":"test"}
         
         if "comics.joe.com" in self.domain:
             parameters["host"] = "first_host"
